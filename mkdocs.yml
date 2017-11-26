@@ -1,0 +1,41 @@
+site_name: 文档或项目名
+pages:
+- 1 主页: index.md
+theme: material #readthedocs
+extra:
+  palette:
+    primary: 'cyan'
+    accent: 'purple'
+extra_javascript:
+  - https://unpkg.com/mermaid@7.1.0/dist/mermaid.min.js
+  - https://cdnjs.cloudflare.com/ajax/libs/raphael/2.2.7/raphael.min.js
+  - https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js
+  - https://cdnjs.cloudflare.com/ajax/libs/js-sequence-diagrams/1.0.6/sequence-diagram-min.js
+  - https://cdnjs.cloudflare.com/ajax/libs/flowchart/1.6.5/flowchart.min.js
+  - js/umlconvert.js
+markdown_extensions:
+  - toc
+  - smarty
+  - pymdownx.arithmatex
+  - pymdownx.betterem:
+      smart_enable: all
+  - pymdownx.caret
+  - pymdownx.critic
+  - pymdownx.details
+  - pymdownx.emoji:
+      emoji_generator: !!python/name:pymdownx.emoji.to_svg
+  - pymdownx.inlinehilite
+  - pymdownx.magiclink
+  - pymdownx.mark
+  - pymdownx.smartsymbols
+  - pymdownx.superfences:
+      custom_fences: [
+            {name: flow, class: uml-flowchart}
+           ,{name: sequence, class: uml-sequence-diagram}
+           ,{name: mermaid, class: uml-mermaid}
+      ]
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.tilde
+plugins:
+  - search
