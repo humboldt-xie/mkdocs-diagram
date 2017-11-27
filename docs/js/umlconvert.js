@@ -1,3 +1,6 @@
+//from: http://www.cmky.net/blog/tool/mkdocs.html
+//author: humboldt
+//new on : https://github.com/humboldt-xie/mkdocs-diagram
 function EachTag(arr,tag,callback){
 	var i=0,maxItem=arr.length;
 	for (; i < maxItem; i++) {
