@@ -40,6 +40,8 @@ function sequenceConvert(index,text,el){
 }
 var diagramType={
 	"gantt":mermaidConvert,
+	"sequenceDiagram":mermaidConvert,
+	"flowchart":mermaidConvert,
 	"uml-flowchart":flowchartConvert,
 	"uml-sequence-diagram":sequenceConvert
 }
@@ -49,7 +51,7 @@ function convertUML() {
 		var codeEl=codes[i];
 		var parentEl = codeEl.parentNode;
 		var text=code2Text(codes[i]);
-		var type=text.substr(0,text.indexOf("\n"));
+		var type=mermaid.mermaidAPI.detectType(text);
 		var conv=diagramType[type];
 		var pclass=parentEl.classList
 		for(var j=0;!conv && j<parentEl.classList.length;j++){
