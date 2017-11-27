@@ -1,7 +1,7 @@
 function EachTag(arr,tag,callback){
 	var i=0,maxItem=arr.length;
 	for (; i < maxItem; i++) {
-		if(arr[i].tagName.toLowerCase() == tag.toLowerCase()){
+		if(arr[i].tagName && arr[i].tagName.toLowerCase() == tag.toLowerCase()){
 			callback(arr[i])
 		}
 	}
@@ -42,17 +42,25 @@ var diagramType={
 	"gantt":mermaidConvert,
 	"sequenceDiagram":mermaidConvert,
 	"flowchart":mermaidConvert,
+	"graph TD":mermaidConvert,
+	"graph LR":mermaidConvert,
 	"uml-flowchart":flowchartConvert,
 	"uml-sequence-diagram":sequenceConvert
 }
 function convertUML() {
-	var codes = document.querySelectorAll("code")
-	for (var i=0; i<codes.length; i++){
-		var codeEl=codes[i];
-		var parentEl = codeEl.parentNode;
-		var text=code2Text(codes[i]);
+	var pre= document.querySelectorAll("pre")
+	for (var i=0; i<pre.length; i++){
+		var codeEl= pre[i];
+		var parentEl = pre[i];
+		EachTag(parentEl.childNodes,"code",function(code){
+			codeEl=code;
+		})
+		var text=code2Text(codeEl);
 		var type=mermaid.mermaidAPI.detectType(text);
 		var conv=diagramType[type];
+		if(text.indexOf("graph")==0){
+			conv=mermaidConvert;
+		}
 		var pclass=parentEl.classList
 		for(var j=0;!conv && j<parentEl.classList.length;j++){
 			conv=diagramType[parentEl.classList[j]]
